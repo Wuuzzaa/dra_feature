@@ -4,9 +4,9 @@ build-backend = "hatchling.build"
 
 [project]
 name = "dra_feature"
-version = "0.0.1"
+version = "0.0.3"
 authors = [
-  { name="Jonas Licht", email="jonas-licht@gmx.de" },
+  { name="Jonas Licht", email="jonas-licht@gmx.de"},
 ]
 description = "A package for automated feature engineering based on dimension reduction algorithms"
 readme = "README.md"
@@ -19,26 +19,26 @@ classifiers = [
 ]
 
 dependencies = [
-    "build >=0.10.0",
-    "colorama >=0.4.6",
-    "joblib >=1.2.0",
-    "kneed >=0.8.2",
-    "llvmlite >=0.39.1",
-    "numba >=0.56.4",
-    "numpy >=1.23.5",
-    "packaging >=23.0",
-    "pandas >=1.5.3",
-    "pynndescent >=0.5.8",
-    "pyproject_hooks >=1.0.0",
-    "python-dateutil >=2.8.2",
-    "pytz >=2022.7.1",
-    "scikit-learn >=1.2.0",
-    "scipy >=1.10.0",
-    "six >=1.16.0",
-    "threadpoolctl >=3.1.0",
-    "tomli >=2.0.1",
-    "tqdm >=4.64.1",
-    "umap-learn >=0.5.3",
+    "build>=0.10.0",
+    "colorama>=0.4.6",
+    "joblib>=1.2.0",
+    "kneed>=0.8.2",
+    "llvmlite>=0.39.1",
+    "numba>=0.56.4",
+    "numpy>=1.23.5",
+    "packaging>=23.0",
+    "pandas>=1.5.3",
+    "pynndescent>=0.5.8",
+    "pyproject_hooks>=1.0.0",
+    "python-dateutil>=2.8.2",
+    "pytz>=2022.7.1",
+    "scikit-learn>=1.2.0",
+    "scipy>=1.10.0",
+    "six>=1.16.0",
+    "threadpoolctl>=3.1.0",
+    "tomli>=2.0.1",
+    "tqdm>=4.64.1",
+    "umap-learn>=0.5.3",
 ]
 
 keywords = ["automl", "feature", "feature engineering", "data preparation"]
