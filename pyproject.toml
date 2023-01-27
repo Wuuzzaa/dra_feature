@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dra_feature"
+version = "0.0.1"
+authors = [
+  { name="Jonas Licht", email="jonas-licht@gmx.de" },
+]
+description = "A package for automated feature engineering based on dimension reduction algorithms"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+keywords = ["automl", "feature", "feature engineering", "data preparation"]
+
+[project.urls]
+"Homepage" = "https://github.com/Wuuzzaa/dra_feature"
+"Bug Tracker" = "https://github.com/Wuuzzaa/dra_feature/issues"
