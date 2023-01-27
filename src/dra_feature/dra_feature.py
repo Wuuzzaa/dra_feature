@@ -7,7 +7,7 @@ from sklearn.base import BaseEstimator
 from sklearn.ensemble import RandomForestClassifier
 from search_optimal_n_components import _search_optimal_n_components
 from umap import UMAP
-from src.default_dra_params import DEFAULT_DRA_PARAMS
+from src.dra_feature.default_dra_params import DEFAULT_DRA_PARAMS
 
 
 class DraFeature:
@@ -20,6 +20,7 @@ class DraFeature:
             train_size: float = 0.7,
             max_n_components_to_create=3,
             return_only_improving_featuretypes=True,
+            early_stopping=10,
     ):
         self.dra_params = dra_params
         self.estimator = estimator
@@ -28,6 +29,7 @@ class DraFeature:
         self.train_size = train_size
         self.max_n_components_to_create = max_n_components_to_create
         self.return_only_improving_featuretypes = return_only_improving_featuretypes
+        self.early_stopping = early_stopping
 
         self.cv_scores_sample = None
         self.basefeaturenames = None
@@ -131,31 +133,21 @@ class DraFeature:
             transformer.set_params(**params)
             self.dra_transformers[featuretype] = self._fit_transformer(transformer, featuretype)
 
-            # if featuretype == "pca":
-            #     transformer = PCA(**params)
-            #     self.dra_transformers["pca"] = self._fit_transformer(transformer, featuretype)
-            #
-            # elif featuretype == "kpca":
-            #     transformer = KernelPCA(**params)
-            #     self.dra_transformers["kpca"] = self._fit_transformer(transformer, featuretype)
-            #
-            # elif featuretype == "lda":
-            #     transformer = LinearDiscriminantAnalysis(**params)
-            #     self.dra_transformers["lda"] = self._fit_transformer(transformer, featuretype)
-            #
-            # elif featuretype == "umap":
-            #     transformer = UMAP(**params)
-            #     self.dra_transformers["umap"] = self._fit_transformer(transformer, featuretype)
-            #
-            # elif featuretype == "kmeans":
-            #     transformer = MiniBatchKMeans(**params)
-            #     self.dra_transformers["kmeans"] = self._fit_transformer(transformer, featuretype)
-            #
-            # else:
-            #     raise(ValueError(f"{featuretype} is not known."))
-
     def transform(self, X:pd.DataFrame, y:pd.Series):
+        print()
+        print("#"*80)
+        print("Transform")
+        print("#" * 80)
+        print()
+        print(f"Baseline cross validation score: {self.cv_scores_sample['baseline']}")
+
         for featuretype, params in self.dra_params.items():
+            print()
+            print("---")
+            print(f"Featuretype: {featuretype}")
+            print(f"cross validation score: {self.cv_scores_sample[featuretype]}")
+            print("---")
+
             # skip featuretypes which do not improve the cross validation score
             if self.return_only_improving_featuretypes:
                 if self.cv_scores_sample["baseline"] >= self.cv_scores_sample[featuretype]:
@@ -185,7 +177,7 @@ class DraFeature:
             max_n_components_to_create=self.max_n_components_to_create,
             y_train=self.y_train,
             prefix=transformer.__class__.__name__,
-            early_stopping=10,
+            early_stopping=self.early_stopping,
         )
 
         # store the cv scores
@@ -206,12 +198,11 @@ class DraFeature:
 
 
 if __name__ == '__main__':
-    from sklearn.datasets import make_classification
     from sklearn.model_selection import cross_val_score
     from sklearn.linear_model import LogisticRegression
     from sklearn.naive_bayes import GaussianNB
     from sklearn.svm import SVC
-    from sklearn.datasets import load_breast_cancer, load_wine
+    from sklearn.datasets import load_wine
 
     # custom toy data
     # X, y = make_classification(n_samples=50000, n_features=20, n_informative=3, n_redundant=2, n_repeated=0, n_classes=2, n_clusters_per_class=2, weights=None, flip_y=0.01, class_sep=1.0, hypercube=True, shift=0.0, scale=1.0, shuffle=True, random_state=42)

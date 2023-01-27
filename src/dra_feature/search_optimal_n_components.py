@@ -17,6 +17,7 @@ def _search_optimal_n_components(
     # key n_components: int
     # value cv_score: float
     cv_scores_dict = {}
+
     last_knee = None
     last_knee_found_n_components = None
 
@@ -50,7 +51,7 @@ def _search_optimal_n_components(
         else:
             X_train_trans = pd.DataFrame(transformer.transform(X_train)).add_prefix(prefix)
 
-        # calc cross validation score using pca and baseline features
+        # calc cross validation score using the new features and baseline features
         X_train_trans_baseline = pd.concat([X_train, X_train_trans], axis="columns")
 
         cv_score = cross_val_score(estimator, X_train_trans_baseline, y_train, cv=5, n_jobs=-1).mean()
