@@ -5,9 +5,11 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.model_selection import train_test_split
 from sklearn.base import BaseEstimator
 from sklearn.ensemble import RandomForestClassifier
-from src.dra_feature.search_optimal_n_components import _search_optimal_n_components
+from sklearn.model_selection import cross_val_score
 from umap import UMAP
-from src.dra_feature.default_dra_params import DEFAULT_DRA_PARAMS
+
+from src.dra.search_optimal_n_components import _search_optimal_n_components
+from src.dra.default_dra_params import DEFAULT_DRA_PARAMS
 
 
 class DraFeature:
@@ -198,7 +200,6 @@ class DraFeature:
 
 
 if __name__ == '__main__':
-    from sklearn.model_selection import cross_val_score
     from sklearn.linear_model import LogisticRegression
     from sklearn.naive_bayes import GaussianNB
     from sklearn.svm import SVC
