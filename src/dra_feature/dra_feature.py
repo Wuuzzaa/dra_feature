@@ -5,7 +5,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.model_selection import train_test_split
 from sklearn.base import BaseEstimator
 from sklearn.ensemble import RandomForestClassifier
-from search_optimal_n_components import _search_optimal_n_components
+from src.dra_feature.search_optimal_n_components import _search_optimal_n_components
 from umap import UMAP
 from src.dra_feature.default_dra_params import DEFAULT_DRA_PARAMS
 
