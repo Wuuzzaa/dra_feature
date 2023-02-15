@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "dra_feature"
-version = "0.0.30"
+version = "0.0.31"
 authors = [
   { name="Jonas Licht", email="jonas-licht@gmx.de"},
 ]
